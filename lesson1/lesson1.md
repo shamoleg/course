@@ -108,7 +108,10 @@ readme.txt
 удалить файл
 
 ```console
-
+olegsham@course:~/catkin_ws/src/courcebot$ ls
+readme.txt
+olegsham@course:~/catkin_ws/src/courcebot$ rm readme.txt 
+olegsham@course:~/catkin_ws/src/courcebot$ ls
 ```
 
 ### **mv**
@@ -116,14 +119,18 @@ readme.txt
 переместить файл
 
 ```console
-
+olegsham@course:~/catkin_ws/src$ mv readme.txt courcebot/
+olegsham@course:~/catkin_ws/src$ ls
+CMakeLists.txt  courcebot
+olegsham@course:~/catkin_ws/src$ ls courcebot/
+readme.txt
 ```
-
 
 ### **echo**
 
 Вывести строку
 
 ```console
-
+olegsham@course:~/catkin_ws/src$ echo hi
+hi
 ```
