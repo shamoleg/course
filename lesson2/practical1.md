@@ -112,7 +112,7 @@ float64 z
 Сформируем сообщение для темы /turtle1/cmd_vel с помощью команды
 
 ```console
-$  rostopic pub /turtle1/cmd_vel geometry_msgs/Twist "linear:
+rostopic pub /turtle1/cmd_vel geometry_msgs/Twist "linear:
   x: 1.0
   y: 0.0
   z: 0.0
@@ -125,7 +125,7 @@ angular:
 Видим что черепашка пройдя определенное растояние остановилась, это следствие того, что сообщение было опубликовано 1 раз, для постоянной отправки сообжений через `rostopic pub` добавить флаг -r (rate) со значением частоты отправги сообщений в герцах.
 
 ```console
-$ rostopic pub -r 50 /turtle1/cmd_vel geometry_msgs/Twist "linear:
+rostopic pub -r 50 /turtle1/cmd_vel geometry_msgs/Twist "linear:
   x: 1.0
   y: 0.0
   z: 0.0
@@ -140,5 +140,5 @@ angular:
 rqt_plot отображает временную диаграмму данных, опубликованных по темам. Здесь мы будем использовать rqt_plot для построения данных, публикуемых в теме /turtle1/pose . Сначала запустите rqt_plot, набрав
 
 ```console
-$ rqt_plot
+rqt_plot
 ```
