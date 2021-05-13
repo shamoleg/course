@@ -1,55 +1,55 @@
 
 # Создание пакета, публиканта и подписчика
 
-## Создание рабочуей области
+## Создание рабочей области
 
 Для создания союственнного пакета необходимо создать рабочую область, где будут храниться исходный код пакетов.
 
 ```console
-$ mkdir -p ~/catkin_ws/src
-$ cd ~/catkin_ws/
-$ catkin_make
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/
+catkin_make
 ```
 
 Чтобы добавить рабочую область в среду ROS, вам необходимо выполнить скрипт лежащий в файле `~/catkin_ws/devel/setup.bash`. Для удобство добавим его выполнение в файл /.basgrc и запустим командами:
 
 ```console
-& echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
-& source ~/.bashrc
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+source ~/.bashrc
 ```
 
 Пакеты хранятся в папе src, перейдем в эту папку.
 
 ```console
-$ cd ~/catkin_ws/src
+cd ~/catkin_ws/src
 ```
 
 Создадим пакет с помощью команды `catkin_create_pkg <имя_пакета> [зависимость1] [зависимость2] [зависимость3]`
 
 ```console
-$ catkin_create_pkg start_pkg std_msgs rospy roscpp
+catkin_create_pkg start_pkg std_msgs rospy roscpp
 ```
 
 Соберем пакет
 
 ```console
-$ cd ~/catkin_ws
-$ catkin_make
+cd ~/catkin_ws
+catkin_make
 ```
 
 В итоге должно получиться дерево файлов
 
 ```console
-catkin_ws/               -- WORKSPACE
+catkin_ws/               -- рабочая область
   build/
     ...
   devel/
     ...
   src/                   
-    CMakeLists.txt       -- 'Toplevel' CMake file, provided by catkin
+    CMakeLists.txt       -- фаил сборки рабочей области
     start_pkg/
-      CMakeLists.txt     -- CMakeLists.txt file for package
-      package.xml        -- Package manifest for package
+      CMakeLists.txt     -- фаил сборки пакета
+      package.xml        -- манифест
 ```
 
 ## Создание публиканта
@@ -57,21 +57,21 @@ catkin_ws/               -- WORKSPACE
 Измените каталог на пакет start_pkg
 
 ```console
-$ roscd start_pkg
+roscd start_pkg
 ```
 
 Сначала давайте создадим папку 'scripts' для хранения наших скриптов Python
 
 ```console
-$ mkdir scripts
-$ cd scripts
+mkdir scripts
+cd scripts
 ```
 
 Создадим файл публиканта.
 
 ```console
-$ touch talker.py   
-$ chmod +x talker.py
+touch talker.py   
+chmod +x talker.py
 ```
 
 ```python
@@ -100,9 +100,9 @@ if __name__ == '__main__':
 Создадим скрипт подписчика.
 
 ```console
-$ roscd start_pkg/scripts/
-$ touch listener.py
-$ chmod +x listener.py
+roscd start_pkg/scripts/
+touch listener.py
+chmod +x listener.py
 ```
 
 ```python
@@ -114,12 +114,8 @@ def callback(data):
     rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
     
 def listener():
-
     rospy.init_node('listener', anonymous=True)
-
     rospy.Subscriber("chatter", String, callback)
-
-
     rospy.spin()
 
 if __name__ == '__main__':
