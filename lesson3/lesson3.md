@@ -83,7 +83,7 @@ URDF это пакет содержит ряд спецификаций XML дл
     <parent link="base_link"/>
     <child link="front_right_wheel"/>
     <origin xyz="0.16 0.15 -0.02"/>
-    s<inertial>
+    <inertial>
       <mass value="10"/>
       <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0"
       izz="0.2"/>
@@ -107,7 +107,8 @@ URDF это пакет содержит ряд спецификаций XML дл
   <arg name="model" default="$(find coursebot_description)/urdf/coursebot.urdf"/>
 
   <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
-
+  
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 </launch>
 ```
@@ -138,4 +139,5 @@ rviz
 
 Получим модель робота с координатами преобразований tf2
 
+/TODO change image
 ![display](./image/coursbviz.png)
