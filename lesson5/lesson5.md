@@ -129,6 +129,17 @@ IMU-модуль на 9 степеней свободы включает в се
 
 ## Запуск робота в симуляторе
 
+Соединим описание робота с URDF разметкой в файле `coursebot_gazebo.xacro`
+
+```xml
+<robot name="coursebot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+  
+  <xacro:include filename="$(find coursebot_description)/urdf/coursebot.xacro"/>
+  <xacro:include filename="$(find coursebot_gazebo)/urdf/gazebo_plugin.xacro"/>
+
+</robot>
+```
+
 Для удобного запуска необходимо создать загрузочный файл `coursebot_gazebo.launch` и прописать в нем условия появления робота на сцене.
 
 ```xml
@@ -146,14 +157,34 @@ IMU-модуль на 9 степеней свободы включает в се
 
     <!-- загрузка URDF описисания -->
     <param name="robot_description" command="$(find xacro)/xacro.py '$(arg urdf_robot_file)'" />  
-  
 
 
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
     args="-urdf -x $(arg x) -y $(arg y) -z $(arg z)  -model $(arg robot_name) -param robot_description">
     <remap from="tf" to="gazebo_tf"/> 
     </node>
-  
-
 </launch>
 ```
+
+Запустим пустой мир в Gazebo командой
+
+```console
+roslaunch gazebo_ros empty_world.launch 
+```
+
+Далее в новом окне терминала запустим робота командой
+
+```console
+roslaunch coursebot_gazebo coursebot_gazebo.launch
+```
+
+Робот должен появится на сцене, далее запустим в новом окне терминала стандарный узел управления с клавиатуры и проверим плагин дифференциального привода
+
+```console
+roslaunch coursebot_gazebo coursebot_gazebo.launch
+```
+
+Для проверки работы камеры и лидара расположем на сцене пару стандартных объектов. Запустив rviz вигуализируем получаемые показания с датчиков.
+
+
+

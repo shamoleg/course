@@ -74,20 +74,14 @@ URDF это пакет содержит ряд спецификаций XML дл
       <geometry>
         <cylinder length="0.06" radius="0.06"/>
       </geometry>
-      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
-      <material name="red"/>
     </visual>
   </link>
 
   <joint name="base_to_front_right_wheel" type="fixed">
     <parent link="base_link"/>
     <child link="front_right_wheel"/>
-    <origin xyz="0.16 0.15 -0.02"/>
-    <inertial>
-      <mass value="10"/>
-      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0"
-      izz="0.2"/>
-    </inertial>
+    <origin xyz="0.16 0.15 -0.02" rpy="0 0 1.57"/>
+    <axis xyz="0 0 1"/>
   </joint>
   ...
 ```
