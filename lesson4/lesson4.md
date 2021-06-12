@@ -26,6 +26,7 @@ catkin_create_pkg coursebot_gazebo
             <publishTf>1</publishTf>
             <publishWheelJointState>true</publishWheelJointState>
             <updateRate>60.0</updateRate>
+            <!-- изменить на сочленения правого и левого колеса -->
             <leftJoint>front_left_wheel_joint</leftJoint>
             <rightJoint>front_right_wheel_joint</rightJoint>
             <wheelSeparation>0.08</wheelSeparation>
@@ -47,6 +48,7 @@ catkin_create_pkg coursebot_gazebo
 ...
   <transmission name="left_wheel_transmission">
     <type>transmission_interface/SimpleTransmission</type>
+    <!-- изменить ниже сочленение-->
     <joint name="front_left_wheel_joint">
       <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>  
     </joint>
@@ -89,8 +91,6 @@ catkin_create_pkg coursebot_gazebo
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
     args="-urdf -x $(arg x) -y $(arg y) -z $(arg z)  -model $(arg robot_name) -param robot_description"/>
 
-    <!-- <rosparam file="$(find coursebot_gazebo)/config/diff_drive.yaml" command="load" /> -->
-
 </launch>
 ```
 
@@ -108,7 +108,13 @@ roslaunch coursebot_gazebo coursebot_gazebo.launch
 
 Наш робот должен появиться в центре координат
 
-Для контроля скорости запустим ноду управления с клавиатуры, котора шлёт угловую и линейную скорости в топик /cmd_vel
+Для контроля скорости запустим ноду управления с клавиатуры, котора шлёт угловую и линейную скорости в топик /cmd_vel. Для начало установим
+
+```console
+sudo apt-get ros-kinetic-teleop-twist-keyboard
+```
+
+Теперь запустим
 
 ```console
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py

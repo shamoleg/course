@@ -5,7 +5,7 @@
 Созададим новый пакет в `~/catkin_ws/src` и добавим необходимые зависимости
 
 ```console
-catkin_create_pkg coursebot_control rospy std_msgs
+catkin_create_pkg coursebot_control rospy std_msgs sensor_msgs cv_bridge
 ```
 
 Создадим папку `scripts` где создадим файл с классом управления роботом `robot_control.py` . ВАЖНО, в названияъ файлов использовать строчные символы, а также не забывать про разрешение на выполнение.
@@ -77,4 +77,16 @@ if __name__ == '__main__':
 
     except rospy.ROSInterruptException:
         pass
+```
+
+Для примера использования приведен скрипт ниже
+
+```python
+from robot_control_class import RobotControl
+
+rc = RobotControl()
+a = rc.get_laser(360)#в переменную а запишется значение измерения лидаром, аргумент метода угол
+print ("The distance measured is: ", a)
+rc.move_forward()
+
 ```
