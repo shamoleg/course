@@ -152,7 +152,8 @@ IMU-модуль на 9 степеней свободы включает в се
     <arg name="z" default="0.2" />
     <arg name="urdf_robot_file" default="$(find coursebot_gazebo)/urdf/coursebot_gazebo.xacro" />
     <arg name="robot_name" default="coursebot" />
-
+    
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
     <!-- загрузка URDF описисания -->

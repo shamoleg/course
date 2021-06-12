@@ -67,7 +67,7 @@ mkdir scripts
 cd scripts
 ```
 
-Создадим файл публиканта.
+Создадим файл публиканта и дадим права на выполнение.
 
 ```console
 touch talker.py   
@@ -96,7 +96,7 @@ if __name__ == '__main__':
         pass
 ```
 
-Создадим скрипт подписчика.
+Создадим скрипт подписчика и дадим права на выполнение.
 
 ```console
 roscd start_pkg/scripts/
@@ -119,4 +119,22 @@ def listener():
 
 if __name__ == '__main__':
     listener()
+```
+
+Для запуска файлов необходимо в первом окне терминала запустить ядро ROS
+
+```console
+roscore
+```
+
+Во втором окне терминала запустить публиканта
+
+```console
+rosrun start_pkg talker.py
+```
+
+В третьем окне терминала запустим подписчика
+
+```console
+rosrun start_pkg talker.py
 ```
