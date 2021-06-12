@@ -17,12 +17,12 @@ rosrun turtlesim turtlesim_node
 
 Будет выведена информация о запущенном узле и одновременно появится графическое окно с черепахой .
 
-!TODO вставить изображение
+![tortle](./image/urdf_tr.png)
 
 Откройте новый терминал и снова выполните вывод списка активных узлов:
 
 ```console
-$ rosnode list
+~$ rosnode list
 /rosout
 /rosout_agg
 /turtle1/cmd_vel
@@ -57,7 +57,8 @@ rqt_graph
 узлами и темой. В графе присутствует дваeзла: teleop_turtle и turtlesim, связанные через тему
 /turtle1/cmd_vel. Узел teleop_turtle публикует данныев тему /turtle1/cmd_vel, а узел turtlesim подписан на
 эту тему и получает данные.
-!TODO вставить изображение
+
+![rqt_graph](./image/nodegraf.png)
 
 Посмотреть, какие данные передаются через тему /turtle1/cmd_vel, можно с помощью команды
 
@@ -72,19 +73,15 @@ rostopic echo /turtle1/cmd_vel
 Oбмен информацией между узлами через темы происходит в виде сообщений. Сообщения должны иметь определенный тип, известный и узлу-издателю, и узлу-подписчику. Таким образом, тип темы определяется типом сообщений, которые в ней публикуются. Тип темы можно получить с помощью команды
 
 ```console
-$ rostopic type /turtle1/cmd_vel
+~$ rostopic type /turtle1/cmd_vel
 geometry_msgs/Twist
 ```
 
 Полную информацию о теме /turtle1/cmd_vel можно получить с помощью команды
 
 ```console
-rostopic info /turtle1/cmd_vel
-```
+~$ rostopic info /turtle1/cmd_vel
 
-Результат:
-
-```console
 Type: geometry_msgs/Twist
 Publishers:
 * /teleop_turtle (http://machine_name:35547/)
@@ -98,7 +95,7 @@ Subscribers:
 Twist из пакета geometry_msgs. Информацию о типе сооб щения можно получить с помощью команды rosmsg
 
 ```console
-$ rosmsg show geometry_msgs/Twist
+~$ rosmsg show geometry_msgs/Twist
 geometry_msgs/Vector3 linear
 float64 x
 float64 y
@@ -112,7 +109,7 @@ float64 z
 Сформируем сообщение для темы /turtle1/cmd_vel с помощью команды
 
 ```console
-rostopic pub /turtle1/cmd_vel geometry_msgs/Twist "linear:
+~& rostopic pub /turtle1/cmd_vel geometry_msgs/Twist "linear:
   x: 1.0
   y: 0.0
   z: 0.0
@@ -125,7 +122,7 @@ angular:
 Видим что черепашка пройдя определенное растояние остановилась, это следствие того, что сообщение было опубликовано 1 раз, для постоянной отправки сообжений через `rostopic pub` добавить флаг -r (rate) со значением частоты отправги сообщений в герцах.
 
 ```console
-rostopic pub -r 50 /turtle1/cmd_vel geometry_msgs/Twist "linear:
+~& rostopic pub -r 50 /turtle1/cmd_vel geometry_msgs/Twist "linear:
   x: 1.0
   y: 0.0
   z: 0.0

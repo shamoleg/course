@@ -47,7 +47,7 @@ catkin_ws/               -- рабочая область
     ...
   src/                   
     CMakeLists.txt       -- фаил сборки рабочей области
-    start_pkg/
+    start_pkg/           -- папка созданного пакета
       CMakeLists.txt     -- фаил сборки пакета
       package.xml        -- манифест
 ```
