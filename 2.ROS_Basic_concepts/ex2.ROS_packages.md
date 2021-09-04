@@ -1,4 +1,3 @@
-
 # Создание пакета, публиканта и подписчика
 
 ## Создание рабочей области
@@ -46,9 +45,9 @@ catkin_ws/               -- рабочая область
   devel/
     ...
   src/                   
-    CMakeLists.txt       -- фаил сборки рабочей области
+    CMakeLists.txt       -- файл сборки рабочей области
     start_pkg/           -- папка созданного пакета
-      CMakeLists.txt     -- фаил сборки пакета
+      CMakeLists.txt     -- файл сборки пакета
       package.xml        -- манифест
 ```
 
@@ -136,5 +135,5 @@ rosrun start_pkg talker.py
 В третьем окне терминала запустим подписчика
 
 ```console
-rosrun start_pkg talker.py
+rosrun start_pkg listener.py
 ```

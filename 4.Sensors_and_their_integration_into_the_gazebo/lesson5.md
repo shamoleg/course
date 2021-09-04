@@ -1,8 +1,6 @@
 # Симулирование показаний с датчиков
 
-/TODO
-
-Перед добавлением датчика, необходимо создать сответсвущий элемент в URDF разметке робота, к ссылке которой будет привязан плагин датчика. Подробно о всех плагинах можно прочитать тут <http://gazebosim.org/tutorials?tut=ros_gzplugins>
+Перед добавлением датчика, необходимо создать соответствующий элемент в URDF разметке робота, к ссылке которой будет привязан плагин датчика. Подробно о всех плагинах можно прочитать тут <http://gazebosim.org/tutorials?tut=ros_gzplugins>
 
 ## Инерционное измерительное устройство
 
@@ -17,11 +15,9 @@ IMU-модуль на 9 степеней свободы включает в се
 Чтобы симулировать показания необходимо добавить плагин в
 `gazebo_plugin.xacro`
 
-Очень важно незабыть изменить тег `<bodyName>`, именнно от него будет расчитываться показания датчика.
+Очень важно не забыть изменить тег `<bodyName>`, именно от него будет рассчитываться показания датчика.
 
 ```xml
-<robot>
-  ...
   <gazebo>
     <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
       <alwaysOn>true</alwaysOn>
@@ -32,8 +28,6 @@ IMU-модуль на 9 степеней свободы включает в се
       <updateRate>20.0</updateRate>
     </plugin>
   </gazebo>
-  ...
-</robot>
 ```
 
 ## Лидар
@@ -44,8 +38,6 @@ IMU-модуль на 9 степеней свободы включает в се
 `gazebo_plugin.xacro`
 
 ```xml
-<robot>
-  ...
   <gazebo reference="lidar_link">
     <sensor type="gpu_ray" name="lidar">
       <pose>0 0 0 0 0 0</pose>
@@ -77,15 +69,11 @@ IMU-модуль на 9 степеней свободы включает в се
       </plugin>
     </sensor>
   </gazebo>
-  ...
-</robot>
 ```
 
 ## Камера
 
 ```xml
-<robot>
-  ...
   <!-- camera -->
   <gazebo reference="camera_link">
     <sensor type="camera" name="camera">
@@ -123,8 +111,6 @@ IMU-модуль на 9 степеней свободы включает в се
       </plugin>
     </sensor>
   </gazebo>
-  ...
-</robot>
 ```
 
 ## Запуск робота в симуляторе
@@ -134,13 +120,13 @@ IMU-модуль на 9 степеней свободы включает в се
 ```xml
 <robot name="coursebot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
   
-  <xacro:include filename="$(find coursebot_description)/urdf/coursebot.xacro"/>
-  <xacro:include filename="$(find coursebot_gazebo)/urdf/gazebo_plugin.xacro"/>
+  <xacro:include filename="$(find bot_description)/urdf/description.xacro"/>
+  <xacro:include filename="$(find bot_description)/urdf/gazebo_plugin.xacro"/>
 
 </robot>
 ```
 
-Для удобного запуска необходимо создать загрузочный файл `coursebot_gazebo.launch` и прописать в нем условия появления робота на сцене.
+Для удобного запуска необходимо создать загрузочный файл `bot_gazebo.launch` и прописать в нем условия появления робота на сцене.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -156,7 +142,6 @@ IMU-модуль на 9 степеней свободы включает в се
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
-    <!-- загрузка URDF описисания -->
     <param name="robot_description" command="$(find xacro)/xacro.py '$(arg urdf_robot_file)'" />  
 
 
@@ -173,16 +158,16 @@ IMU-модуль на 9 степеней свободы включает в се
 roslaunch gazebo_ros empty_world.launch 
 ```
 
-Далее в новом окне терминала запустим робота командой
+Далее в новом окне терминала запускаем робота командой
 
 ```console
-roslaunch coursebot_gazebo coursebot_gazebo.launch
+roslaunch bot_gazebo bot_gazebo.launch
 ```
 
-Робот должен появится на сцене, далее запустим в новом окне терминала стандарный узел управления с клавиатуры и проверим плагин дифференциального привода
+Робот должен появится на сцене, далее запустим в новом окне терминала стандартный узел управления с клавиатуры и проверим плагин дифференциального привода
 
 ```console
-roslaunch coursebot_gazebo coursebot_gazebo.launch
+roslaunch bot_gazebo bot_gazebo.launch
 ```
 
-Для проверки работы камеры и лидара расположем на сцене пару стандартных объектов. Запустив rviz вигуализируем получаемые показания с датчиков.
+Для проверки работы камеры и лидара расположим на сцене пару стандартных объектов. Запустив rviz визуализируем получаемые показания с датчиков.
