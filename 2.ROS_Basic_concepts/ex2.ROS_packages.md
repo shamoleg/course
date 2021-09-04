@@ -36,6 +36,9 @@ cd ~/catkin_ws
 catkin_make
 ```
 
+<div style="page-break-before:always;">
+</div>
+
 В итоге должно получиться дерево файлов
 
 ```console
@@ -66,6 +69,7 @@ mkdir scripts
 cd scripts
 ```
 
+
 Создадим файл публиканта и дадим права на выполнение.
 
 ```console
@@ -74,7 +78,7 @@ chmod +x talker.py
 ```
 
 ```python
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import rospy
 from std_msgs.msg import String
 
@@ -88,12 +92,15 @@ def talker():
         pub.publish(hello_str)
         rate.sleep()
 
+
 if __name__ == '__main__':
     try:
         talker()
     except rospy.ROSInterruptException:
         pass
 ```
+
+## Создание подписчика 
 
 Создадим скрипт подписчика и дадим права на выполнение.
 
@@ -104,7 +111,7 @@ chmod +x listener.py
 ```
 
 ```python
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import rospy
 from std_msgs.msg import String
 
