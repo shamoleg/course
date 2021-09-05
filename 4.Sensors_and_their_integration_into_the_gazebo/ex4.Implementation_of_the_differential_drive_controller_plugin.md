@@ -94,7 +94,7 @@ roslaunch bot_description bot_gazebo.launch
 Для контроля скорости запустим ноду управления с клавиатуры, которая шлёт угловую и линейную скорости в топик /cmd_vel. Для начало установим пакет с данной нодой
 
 ```console
-sudo apt-get ros-kinetic-teleop-twist-keyboard
+sudo apt-get install ros-noetic-teleop-twist-keyboard
 ```
 
 Теперь запустим её командой
