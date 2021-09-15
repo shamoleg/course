@@ -50,12 +50,6 @@ catkin_make
 roslaunch bot_description eazy_maze_world.launch
 ```
 
-Если же вы хотите запустить пустой мир то следует выполнить команду
-
-```console
-roslaunch gazebo_ros empty_world.launch 
-```
-
 Для спавна мобильной платформы в новом окне терминала выполнить команду
 
 ```console

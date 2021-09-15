@@ -56,23 +56,22 @@ catkin_ws/               -- рабочая область
 
 ## Создание публиканта
 
-Измените каталог на пакет start_pkg
+Измените каталог на пакет start_pkg:
 
 ```console
-roscd start_pkg
+cd ~/catkin_ws/start_pkg
 ```
 
-Сначала давайте создадим папку 'scripts' для хранения наших скриптов Python
+Сначала  создадим папку 'scripts' для хранения скриптов Python:
 
 ```console
 mkdir scripts
-cd scripts
 ```
-
 
 Создадим файл публиканта и дадим права на выполнение.
 
 ```console
+cd ~/catkin_ws/start_pkg/scripts
 touch talker.py   
 chmod +x talker.py
 ```
@@ -99,6 +98,9 @@ if __name__ == '__main__':
     except rospy.ROSInterruptException:
         pass
 ```
+
+Разберем код
+
 
 ## Создание подписчика 
 
